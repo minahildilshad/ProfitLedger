@@ -1,0 +1,11 @@
+import { build } from 'esbuild';
+import { readFileSync,writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname,join } from 'node:path';
+const root=dirname(fileURLToPath(import.meta.url));
+const result=await build({entryPoints:[join(root,'src/entry.tsx')],bundle:true,write:false,format:'iife',platform:'browser',target:'es2020',jsx:'automatic',minify:true,define:{'process.env.NODE_ENV':'"production"'}});
+const script=result.outputFiles[0].text.replaceAll('</script','<\\/script');
+const css=readFileSync(join(root,'src/theme.css'),'utf8');
+const html=`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'"><title>Kundeeeq | Jewelry Business Studio</title><style>${css}</style></head><body><div id="root"></div><noscript>Enable JavaScript to use the tracker.</noscript><script>${script}</script></body></html>`;
+for(const name of ['index.html','ProfitLedger_Offline.html'])writeFileSync(join(root,name),html);
+console.log('Built index.html and ProfitLedger_Offline.html');

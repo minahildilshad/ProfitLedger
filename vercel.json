@@ -1,0 +1,6 @@
+{
+  "framework": null,
+  "installCommand": "node --version",
+  "buildCommand": "node deploy.mjs",
+  "outputDirectory": "dist"
+}

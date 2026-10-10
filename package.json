@@ -1,0 +1,23 @@
+{
+  "name": "profitledger",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline jewelry purchase, sales, stock and profit tracker.",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "build:deploy": "node deploy.mjs"
+  },
+  "dependencies": {
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "lucide-react": "1.31.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.0"
+  }
+}
